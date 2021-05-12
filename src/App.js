@@ -1,10 +1,10 @@
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Fragment } from 'react';
+import { Fragment, useContext } from 'react';
 
 import Counter from './components/Counter/Counter';
 import CounterReducer from './components/Counter/CounterReducer';
-import Users from './components/Users/Users';
-import Profile from './components/Users/Profile';
+import UserStore, { UserContext } from './components/Users/Users';
+import Profile, { ProfileHeader, ProfileBody } from './components/Users/Profile';
 
 import GlobalStyle from './global';
 
@@ -20,9 +20,14 @@ function App() {
           <Route path='/counter-reducer'>
             <CounterReducer />
           </Route>
-          <Route path='/profile'>
-            <Profile />
-          </Route>
+          <UserStore>
+            <Route path='/profile'>
+              <Profile>
+                <ProfileHeader />
+                <ProfileBody />
+              </Profile>
+            </Route>
+          </UserStore>
         </Switch>
       </Router>
     </Fragment>
